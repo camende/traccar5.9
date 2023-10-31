@@ -4,6 +4,7 @@ import { loadImage, prepareIcon } from './mapUtil';
 
 import directionSvg from '../../resources/images/direction.svg';
 import backgroundSvg from '../../resources/images/background.svg';
+import background_lgSvg from '../../resources/images/background_lg.svg';
 import animalSvg from '../../resources/images/icon/animal.svg';
 import bicycleSvg from '../../resources/images/icon/bicycle.svg';
 import boatSvg from '../../resources/images/icon/boat.svg';
@@ -28,28 +29,30 @@ import vanSvg from '../../resources/images/icon/van.svg';
 import rwcSvg from '../../resources/images/icon/rwc.svg';
 
 export const mapIcons = {
-  animal: animalSvg,
-  bicycle: bicycleSvg,
-  boat: boatSvg,
-  bus: busSvg,
-  car: carSvg,
-  crane: craneSvg,
-  default: defaultSvg,
-  helicopter: helicopterSvg,
-  motorcycle: motorcycleSvg,
-  offroad: offroadSvg,
-  person: personSvg,
-  pickup: pickupSvg,
-  plane: planeSvg,
-  scooter: scooterSvg,
-  ship: shipSvg,
-  tractor: tractorSvg,
-  train: trainSvg,
-  tram: tramSvg,
-  trolleybus: trolleybusSvg,
-  truck: truckSvg,
-  van: vanSvg,
-  rwc: rwcSvg,
+  animal: { icon: animalSvg, backgroundSvg },
+  bicycle: { icon: bicycleSvg, backgroundSvg },
+  boat: { icon: boatSvg, backgroundSvg },
+  bus: { icon: busSvg, backgroundSvg },
+  car: { icon: carSvg, backgroundSvg },
+  crane: { icon: craneSvg, backgroundSvg },
+  default: { icon: defaultSvg, backgroundSvg },
+  helicopter: { icon: helicopterSvg, backgroundSvg },
+  motorcycle: { icon: motorcycleSvg, backgroundSvg },
+  offroad: { icon: offroadSvg, backgroundSvg },
+  person: { icon: personSvg, backgroundSvg },
+  pickup: { icon: pickupSvg, backgroundSvg },
+  plane: { icon: planeSvg, backgroundSvg },
+  scooter: { icon: scooterSvg, backgroundSvg },
+  ship: { icon: shipSvg, backgroundSvg },
+  tractor: { icon: tractorSvg, backgroundSvg },
+  train: { icon: trainSvg, backgroundSvg },
+  tram: { icon: tramSvg, backgroundSvg },
+  trolleybus: { icon: trolleybusSvg, backgroundSvg },
+  truck: { icon: truckSvg, backgroundSvg },
+  van: { icon: vanSvg, backgroundSvg },
+  rwc: { icon: rwcSvg, background_lgSvg },
+  
+
 };
 
 export const mapIconKey = (category) => (mapIcons.hasOwnProperty(category) ? category : 'default');
@@ -61,16 +64,18 @@ const mapPalette = createPalette({
 });
 
 export default async () => {
-  const background = await loadImage(backgroundSvg);
-  mapImages.background = await prepareIcon(background);
-  mapImages.direction = await prepareIcon(await loadImage(directionSvg));
+  await Promise.all(Object.keys(mapIcons).map(async (category) => {
+    const background = await loadImage(../../resources/images/${mapIcons[category].background});
+    mapImages[${category}-background] = await prepareIcon(background);
+  });
+
   await Promise.all(Object.keys(mapIcons).map(async (category) => {
     const results = [];
     ['info', 'success', 'error', 'neutral'].forEach((color) => {
-      results.push(loadImage(mapIcons[category]).then((icon) => {
-        mapImages[`${category}-${color}`] = prepareIcon(background, icon, mapPalette[color].main);
+      results.push(loadImage(mapIcons[category].icon).then((icon) => {
+        mapImages[${category}-${color}] = prepareIcon(mapImages[${category}-background], icon, mapPalette[color].main);
       }));
     });
     await Promise.all(results);
-  }));
+});
 };

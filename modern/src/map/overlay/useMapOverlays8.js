@@ -101,26 +101,32 @@ export default () => {
     {
       id: 'lifeguardStations',
       title: t('mapLifeguardStations'),
-      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Service=WMS&Version=1.1.0&Layers=Reddingsposten&Styles=Reddingsposten&Request=GetMap&Tiled=true&TilesOrigin={x},{y}&BBox={bbox-epsg-3857}&Width=512&Height=512&Format=image/png&Transparent=true&srs=EPSG:3857']),
+      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Version=1.1.0&Layers=thetrackingsolution:Reddingsposten&Request=GetMap&BBox={bbox-epsg-3857}&Width=256&Height=256&Format=image/png&Transparent=true&srs=EPSG:3857']),
       available: true,
     },
     {
       id: 'knrmStations',
       title: t('mapKnrmStations'),
-      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Service=WMS&Version=1.1.0&Layers=KNRM_stations&Styles=KNRM%20stations&Request=GetMap&Tiled=true&TilesOrigin={x},{y}&BBox={bbox-epsg-3857}&Width=512&Height=512&Format=image/png&Transparent=true&srs=EPSG:3857']),
+      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Version=1.1.0&Layers=thetrackingsolution:KNRM_stations&Request=GetMap&BBox={bbox-epsg-3857}&Width=256&Height=256&Format=image/png&Transparent=true&srs=EPSG:3857']),
       available: true,
     },
     {
       id: 'beachPolesLayer',
       title: t('mapBeachPoles'),
-      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Service=WMS&Version=1.1.0&Layers=Strandpalen&Styles=Strandpalen&Request=GetMap&Tiled=true&TilesOrigin={x},{y}&BBox={bbox-epsg-3857}&Width=512&Height=512&Format=image/png&Transparent=true&srs=EPSG:3857']),
+      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Version=1.1.0&Layers=thetrackingsolution:Strandpalen&Request=GetMap&BBox={bbox-epsg-3857}&Width=256&Height=256&Format=image/png&Transparent=true&srs=EPSG:3857']),
       available: true,
     },
     {
       id: 'ambulanceTransferPlaces',
       title: t('mapAmbulanceTransferPlaces'),
-      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Service=WMS&Version=1.1.0&Layers=AOP&Styles=aop&Request=GetMap&Tiled=true&TilesOrigin={x},{y}&BBox={bbox-epsg-3857}&Width=512&Height=512&Format=image/png&Transparent=true&srs=EPSG:3857']),
-      available: true,
-    },
+      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Service=WMS&Version=1.1.0&Layers=thetrackingsolution:AOP&Request=GetMap&Tiled=true&TilesOrigin={x},{y}&BBox={bbox-epsg-3857}&Width=256&Height=256&Format=image/png&Transparent=true&srs=EPSG:3857']),
+      available: true,
+    },
+    {
+      id: 'aerialPhoto',
+      title: t('mapAerialPhoto'),
+      source: sourceCustom(['https://geoserver.eventtracking.nl/geoserver/thetrackingsolution/wms?Service=WMS&Version=1.1.0&Layers=thetrackingsolution:luchtfoto&Tiled=true']),
+      available: true,
+    },
   ];
 };

@@ -349,7 +349,7 @@
     "mapOrdnanceSurvey": "Ordnance Survey",
     "mapMapboxStreets": "Mapbox Streets",
     "mapMapboxOutdoors": "Mapbox Outdoors",
-    "mapMapboxSatellite": "Mapbox Sateliet",
+    "mapMapboxSatellite": "Mapbox Satellite",
     "mapMapboxKey": "MapBox toegangsleutel",
     "mapMapTilerBasic": "MapTiler Basic",
     "mapMapTilerHybrid": "MapTiler Hybrid",
@@ -577,13 +577,6 @@
     "categoryTruck": "Vrachtwagen",
     "categoryVan": "Busje",
     "categoryScooter": "Scooter",
-    "categoryRwc": "Reddingsbrigade RWC",
     "maintenanceStart": "Start",
-    "maintenancePeriod": "Periode",
-    "mapLifeguardStations": "Reddingsbrigade posten",
-    "mapKnrmStations": "KNRM stations",
-    "mapBeachPoles": "Strandpalen",
-    "mapAmbulanceTransferPlaces": "Ambulance overdraag plaats",
-    "mapGoogleTraffic": "Google Verkeer",
-    "mapAerialPhoto": "Luchtfoto"
+    "maintenancePeriod": "Periode"
 }

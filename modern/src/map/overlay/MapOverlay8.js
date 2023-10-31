@@ -2,11 +2,10 @@ import { useId, useEffect } from 'react';
 import { useAttributePreference } from '../../common/util/preferences';
 import { map } from '../core/MapView';
 import useMapOverlays from './useMapOverlays';
-import { useSelector } from 'react-redux';
 
 const MapOverlay = () => {
   const id = useId();
-
+  
   const mapOverlays = useMapOverlays();
   const activeMapOverlays = useAttributePreference('activeMapOverlays') || [];
   const availableActiveMapOverlays = mapOverlays.filter((overlay) => overlay.available && activeMapOverlays.includes(overlay.id));
@@ -15,16 +14,16 @@ const MapOverlay = () => {
     if (availableActiveMapOverlays) {
       availableActiveMapOverlays.forEach((mapOverlay) => {
         const { id } = mapOverlay;
-      map.addSource(id, mapOverlay.source);
-      map.addLayer({
-        id,
-        type: 'raster',
-        source: id,
-        layout: {
-          visibility: 'visible',
-        },
+        map.addSource(id, mapOverlay.source);
+        map.addLayer({
+          id,
+          type: 'raster',
+          source: id,
+          layout: {
+            visibility: 'visible',
+          },
+        });
       });
-    });
     }
     return () => {
       if (availableActiveMapOverlays) {

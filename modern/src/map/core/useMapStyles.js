@@ -237,6 +237,15 @@ export default () => {
       attribute: 'mapboxAccessToken',
     },
     {
+      id: 'mapGoogleTraffic',
+      title: t('mapGoogleTraffic'),
+      style: styleCustom({
+        tiles: [`https://mt0.google.com/vt/lyrs=m,traffic&hl=en&x={x}&y={y}&z={z}&s=Ga`],
+        maxZoom: 22,
+     }),
+     available: true,
+    },
+    {
       id: 'custom',
       title: t('mapCustom'),
       style: styleCustom({
