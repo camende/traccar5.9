@@ -6,5 +6,5 @@
   </defs>
 
   <circle cx="5" cy="50%" r="4"
-      style="fill:white; stroke:#DE5308; stroke-width:0.5; filter:url(#shadow);"/>
+      style="fill:white; filter:url(#shadow);"/>
 </svg>
