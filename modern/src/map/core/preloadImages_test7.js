@@ -5,7 +5,6 @@ import { loadImage, prepareIcon } from './mapUtil';
 import directionSvg from '../../resources/images/direction.svg';
 import backgroundSvg from '../../resources/images/background.svg';
 import background_lgSvg from '../../resources/images/background_lifeguard.svg';
-import background_knrmSvg from '../../resources/images/background_knrm.svg';
 import animalSvg from '../../resources/images/icon/animal.svg';
 import bicycleSvg from '../../resources/images/icon/bicycle.svg';
 import boatSvg from '../../resources/images/icon/boat.svg';
@@ -29,51 +28,74 @@ import truckSvg from '../../resources/images/icon/truck.svg';
 import vanSvg from '../../resources/images/icon/van.svg';
 import rwcSvg from '../../resources/images/icon/rwc.svg';
 
+export const background1 = {
+  animal: backgroundSvg,
+  bicycle: backgroundSvg,
+  boat: backgroundSvg,
+  bus: backgroundSvg,
+  car: backgroundSvg,
+  crane: backgroundSvg,
+  default: backgroundSvg,
+  helicopter: backgroundSvg,
+  motorcycle: backgroundSvg,
+  offroad: backgroundSvg,
+  person: backgroundSvg,
+  pickup: backgroundSvg,
+  plane: backgroundSvg,
+  scooter: backgroundSvg,
+  ship: backgroundSvg,
+  tractor: backgroundSvg,
+  train: backgroundSvg,
+  tram: backgroundSvg,
+  trolleybus: backgroundSvg,
+  truck: backgroundSvg,
+  van: backgroundSvg,
+  rwc: background_lgSvg,
+};
 export const mapIcons = {
-  animal: { icon: animalSvg, background: backgroundSvg },
-  bicycle: { icon: bicycleSvg, background: backgroundSvg },
-  boat: { icon: boatSvg, background: backgroundSvg },
-  bus: { icon: busSvg, background: backgroundSvg },
-  car: { icon: carSvg, background: backgroundSvg },
-  crane: { icon: craneSvg, background: backgroundSvg },
-  default: { icon: defaultSvg, background: backgroundSvg },
-  helicopter: { icon: helicopterSvg, background: backgroundSvg },
-  motorcycle: { icon: motorcycleSvg, background: backgroundSvg },
-  offroad: { icon: offroadSvg, background: backgroundSvg },
-  person: { icon: personSvg, background: backgroundSvg },
-  pickup: { icon: pickupSvg, background: backgroundSvg },
-  plane: { icon: planeSvg, background: background_knrmSvg },
-  scooter: { icon: scooterSvg, background: backgroundSvg },
-  ship: { icon: shipSvg, background: backgroundSvg },
-  tractor: { icon: tractorSvg, background: backgroundSvg },
-  train: { icon: trainSvg, background: backgroundSvg },
-  tram: { icon: tramSvg, background: backgroundSvg },
-  trolleybus: { icon: trolleybusSvg, background: backgroundSvg },
-  truck: { icon: truckSvg, background: backgroundSvg },
-  van: { icon: vanSvg, background: backgroundSvg },
-  rwc: { icon: rwcSvg, background: background_lgSvg },
+  animal: animalSvg,
+  bicycle: bicycleSvg,
+  boat: boatSvg,
+  bus: busSvg,
+  car: carSvg,
+  crane: craneSvg,
+  default: defaultSvg,
+  helicopter: helicopterSvg,
+  motorcycle: motorcycleSvg,
+  offroad: offroadSvg,
+  person: personSvg,
+  pickup: pickupSvg,
+  plane: planeSvg,
+  scooter: scooterSvg,
+  ship: shipSvg,
+  tractor: tractorSvg,
+  train: trainSvg,
+  tram: tramSvg,
+  trolleybus: trolleybusSvg,
+  truck: truckSvg,
+  van: vanSvg,
+  rwc: rwcSvg,
 };
 
 export const mapIconKey = (category) => (mapIcons.hasOwnProperty(category) ? category : 'default');
- 
+
 export const mapImages = {};
- 
+
 const mapPalette = createPalette({
   neutral: { main: grey[500] },
 });
- 
+
 export default async () => {
-  const loadImageWithBackground = async (iconPath, backgroundPath) => {
-    const background = await loadImage(backgroundPath);
-    const icon = await loadImage(iconPath);
-    return prepareIcon(background, icon, mapPalette.neutral.main);
-  };
- 
+  const background = await loadImage(background1[category]);
+  mapImages.background = await prepareIcon(background);
+  mapImages.direction = await prepareIcon(await loadImage(directionSvg));
   await Promise.all(Object.keys(mapIcons).map(async (category) => {
-    const iconPath = mapIcons[category].icon;
-    const backgroundPath = mapIcons[category].background;
-    const iconKey = `${category}-neutral`;
- 
-    mapImages[iconKey] = await loadImageWithBackground(iconPath, backgroundPath);
+    const results = [];
+    ['info', 'success', 'error', 'neutral'].forEach((color) => {
+      results.push(loadImage(mapIcons[category]).then((icon) => {
+        mapImages[`${category}-${color}`] = prepareIcon(background1, icon, mapPalette[color].main);
+      }));
+    });
+    await Promise.all(results);
   }));
 };
